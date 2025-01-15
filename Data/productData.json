@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Apple Juice",
+    "description": "Freshly squeezed apple juice with no added sugar.",
+    "price": 2.99,
+    "quantity": 100,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Orange Juice",
+    "description": "100% pure orange juice, rich in Vitamin C.",
+    "price": 3.49,
+    "quantity": 120,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Grape Juice",
+    "description": "Sweet and tangy grape juice made from fresh grapes.",
+    "price": 3.99,
+    "quantity": 80,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Mango Juice",
+    "description": "Delicious mango juice with tropical flavors.",
+    "price": 4.29,
+    "quantity": 90,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Pineapple Juice",
+    "description": "Tropical pineapple juice, sweet and refreshing.",
+    "price": 3.79,
+    "quantity": 110,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Cranberry Juice",
+    "description": "Tangy cranberry juice, perfect for health-conscious consumers.",
+    "price": 3.99,
+    "quantity": 75,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Peach Juice",
+    "description": "Smooth and sweet peach juice for a delightful drink.",
+    "price": 4.19,
+    "quantity": 95,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Pomegranate Juice",
+    "description": "Rich and vibrant pomegranate juice packed with antioxidants.",
+    "price": 4.99,
+    "quantity": 60,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Watermelon Juice",
+    "description": "Light and hydrating watermelon juice with a hint of sweetness.",
+    "price": 3.59,
+    "quantity": 85,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Strawberry Juice",
+    "description": "Sweet strawberry juice made from ripe strawberries.",
+    "price": 4.39,
+    "quantity": 70,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Kiwi Juice",
+    "description": "Exotic kiwi juice with a refreshing twist.",
+    "price": 4.49,
+    "quantity": 55,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Mixed Berry Juice",
+    "description": "A blend of berries for a flavorful and antioxidant-rich juice.",
+    "price": 4.79,
+    "quantity": 65,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Lemon Juice",
+    "description": "Freshly squeezed lemon juice, perfect for drinks and recipes.",
+    "price": 2.49,
+    "quantity": 150,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Cherry Juice",
+    "description": "Sweet and tangy cherry juice from ripe cherries.",
+    "price": 4.89,
+    "quantity": 40,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Guava Juice",
+    "description": "Tropical guava juice with a smooth, sweet flavor.",
+    "price": 3.89,
+    "quantity": 72,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Lychee Juice",
+    "description": "Exquisite lychee juice with a unique, sweet taste.",
+    "price": 5.19,
+    "quantity": 38,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Blackcurrant Juice",
+    "description": "Bold and tangy blackcurrant juice, rich in Vitamin C.",
+    "price": 4.59,
+    "quantity": 50,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Papaya Juice",
+    "description": "Smooth and tropical papaya juice with a rich flavor.",
+    "price": 3.69,
+    "quantity": 60,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Cucumber Juice",
+    "description": "Refreshing cucumber juice for hydration and detox.",
+    "price": 3.29,
+    "quantity": 85,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  },
+  {
+    "name": "Coconut Juice",
+    "description": "Natural coconut juice, rich in electrolytes and hydration.",
+    "price": 5.49,
+    "quantity": 25,
+    "category": "Juice",
+    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "soldOut": false
+  }
+]
