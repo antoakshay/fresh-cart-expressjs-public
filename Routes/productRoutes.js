@@ -10,7 +10,7 @@ productRouter.get(
   authController.protect,
   productController.getAllProducts
 );
-productRouter.get(
+productRouter.post(
   "/search",
   authController.protect,
   productController.findProduct
@@ -40,7 +40,6 @@ productRouter.delete(
   productController.deleteProduct
 );
 
-
 // !!---------------------------------------------------
 
 productRouter.get(
@@ -48,7 +47,5 @@ productRouter.get(
   authController.protect,
   productController.exploreCategory
 );
-
-
 
 module.exports = productRouter;
