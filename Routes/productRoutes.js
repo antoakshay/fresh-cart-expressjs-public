@@ -10,6 +10,13 @@ productRouter.get(
   authController.protect,
   productController.getAllProducts
 );
+
+productRouter.post(
+  "/getProductCount",
+  authController.protect,
+  productController.getDocumentCount
+);
+
 productRouter.post(
   "/search",
   authController.protect,
