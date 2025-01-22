@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Product = require("../models/productModel");
+const _ = require("lodash");
 
 exports.getAllProducts = async (req, res) => {
   try {
@@ -227,13 +228,30 @@ exports.exploreCategory = async function (req, res) {
       {
         $project: {
           category: 1,
+          _id: 0,
         },
       },
     ]);
+    // console.trace(categories);
+    // const uniqueArray = categories.filter(
+    //   // obj is the current object being processed.
+    //   // index is the current position of the object that is being processed
+    //   // arr is an reference to the "categories" array.
+    //   // the findIndex matches the first occurence and returns that index value.
+    //   // so the findIndex would always run from the starting element of the "categories" array.
+    //   (obj, index, arr) =>
+    //     arr.findIndex(
+    //       (item) => JSON.stringify(item) === JSON.stringify(obj)
+    //     ) === index
+    // );
+    // console.trace(uniqueArray);
+
+    const uniqueArray = _.uniqWith(categories, _.isEqual);
+    console.trace(uniqueArray);
     res.status(200).json({
       status: "success",
       message: "List of all categories",
-      data: categories,
+      data: uniqueArray,
     });
   } catch (err) {
     console.error(err);
