@@ -4,6 +4,8 @@ const authenticationController = require("../Controller/authernticationControlle
 
 const userRouter = express.Router();
 
+userRouter.post("/signuptest", authenticationController.signUpOtp);
+userRouter.post("/verifyOtp", authenticationController.otpVerification);
 userRouter.post("/signup", authenticationController.signup);
 userRouter.post("/login", authenticationController.login);
 userRouter.post(

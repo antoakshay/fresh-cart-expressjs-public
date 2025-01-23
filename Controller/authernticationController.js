@@ -7,6 +7,8 @@ const sendEmail = require("../utils/email");
 const crypto = require("crypto");
 const Cart = require("../models/cartModel");
 const Session = require("../models/sessionModel");
+const { default: mongoose } = require("mongoose");
+const UserSignUp = require("../models/userModelSignUp");
 
 dotenv.config({ path: "../config.env" });
 
@@ -17,7 +19,14 @@ const signToken = (id, sessionId) => {
   });
 };
 // SENDING THE JSON web token
-const createSendToken = (user, sessionId, statusCode, res, userName, message) => {
+const createSendToken = (
+  user,
+  sessionId,
+  statusCode,
+  res,
+  userName,
+  message
+) => {
   const token = signToken(user._id, sessionId);
   console.log(process.env.JWT_COOKIE_EXPIRES);
   const cookieOptions = {
@@ -40,14 +49,55 @@ const createSendToken = (user, sessionId, statusCode, res, userName, message) =>
     token,
     data: {
       user,
-      name: userName
+      name: userName,
     },
     message: message,
   });
 };
 
+exports.signUpOtp = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const exsistingUser = await User.findOne({ email: email });
+    if (exsistingUser) {
+      throw new Error("User Already exists");
+    }
+    const newUser = await UserSignUp.create({ email: email });
+    await newUser.generateOtp(email);
+    await newUser.save();
+    res.status(200).json({
+      status: "success",
+      message: "OTP sent successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+exports.otpVerification = async (req, res) => {
+  try {
+    const otp = req.body.otp;
+    const hashedOtp = crypto
+      .createHash("sha256")
+      .update(otp.toString())
+      .digest("hex");
+    const newUser = await UserSignUp.findOne({ signUpOtp: hashedOtp });
+    if (!newUser) throw new Error("Otp expired");
+    const verifyingOtp = await newUser.verifyOtp(hashedOtp);
+    console.trace(newUser);
+  } catch (e) {
+    res.status(400).json({
+      status: "fail",
+      message: e.message || "Invalid OTP",
+    });
+  }
+};
+
 // SIGNUP
-exports.signup = async (req, res, next) => {
+exports.signup = async (req, res) => {
   try {
     // Making sure that no one signs up as admin//
     const newUser = await User.create({
@@ -71,6 +121,7 @@ exports.signup = async (req, res, next) => {
       user: newUser._id,
       products: [],
     });
+    // console.trace(newCart instanceof mongoose.Document);
     await newCart.save();
     createSendToken(newUser, sessionId, 201, res, "User created successfully");
   } catch (err) {
@@ -113,7 +164,6 @@ exports.login = async (req, res, next) => {
     await session.save();
 
     const userName = await User.findOne({ email: email }).select("+name");
-   
 
     // 3) if everything is okay, send token to client
 
