@@ -27,8 +27,8 @@ mongoose
 // });
 
 const options = {
-  key: fs.readFileSync("./Keys/localhost+3-key.pem"),
-  cert: fs.readFileSync("./Keys/localhost+3.pem"),
+  key: fs.readFileSync("./Keys/localhost+2-key.pem"),
+  cert: fs.readFileSync("./Keys/localhost+2.pem"),
 };
 
 https.createServer(options, app).listen(7000, () => {

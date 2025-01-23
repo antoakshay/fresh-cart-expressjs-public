@@ -13,13 +13,21 @@ const userSignUpSchema = new mongoose.Schema({
   },
   signUpOtp: {
     type: String,
-    select: false, // Avoiding the query results of 'signUpOtp'
+    // select: false, // Avoiding the query results of 'signUpOtp'
+  },
+  signUpOtpExpiresAt: {
+    type: Date,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 300,
   },
+});
+
+userSignUpSchema.pre("save", async function () {
+  if (this.isNew) {
+    this.signUpOtpExpiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
+  }
 });
 
 userSignUpSchema.methods.generateOtp = async function (mail) {
@@ -30,12 +38,12 @@ userSignUpSchema.methods.generateOtp = async function (mail) {
     .update(otp.toString())
     .digest("hex");
   await sendSignUpEmail(mail, otp);
-  // await this.save();
+  await this.save();
 };
 
-userSignUpSchema.methods.verifyOtp = function (otp) {
-
-  return this.signUpOtp === otp;
+userSignUpSchema.methods.compareSignUpOtpTime = function () {
+  // console.trace(Date.now() < this.signUpOtpExpiresAt);
+  return Date.now() < this.signUpOtpExpiresAt;
 };
 
 const UserSignUp = mongoose.model("UserSignUp", userSignUpSchema);

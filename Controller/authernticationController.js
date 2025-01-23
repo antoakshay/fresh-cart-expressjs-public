@@ -80,17 +80,41 @@ exports.signUpOtp = async (req, res) => {
 exports.otpVerification = async (req, res) => {
   try {
     const otp = req.body.otp;
-    const hashedOtp = crypto
+    const hashedOtp = await crypto
       .createHash("sha256")
       .update(otp.toString())
       .digest("hex");
     const newUser = await UserSignUp.findOne({ signUpOtp: hashedOtp });
-    if (!newUser) throw new Error("Otp expired");
-    const verifyingOtp = await newUser.verifyOtp(hashedOtp);
+    if (!newUser) throw new Error("Invalid OTP");
+    const verifyingOtp = await newUser.compareSignUpOtpTime();
+    if (!verifyingOtp) throw new Error("OTP expired");
+
+    // !! Creating a temp token, because in the sign-up endpoint,
+    // !! WE wont know who he is, (i.e.,) no credentials access
+    const tempToken = jwt.sign(
+      { email: newUser.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "15m", // Token valid for 15 minutes
+      }
+    );
     console.trace(newUser);
+    res.cookie("tempToken", tempToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+    res.status(200).json({
+      status: "success",
+      token: tempToken,
+      message: "OTP verified successfully",
+    });
   } catch (e) {
     res.status(400).json({
       status: "fail",
+
       message: e.message || "Invalid OTP",
     });
   }
@@ -99,13 +123,22 @@ exports.otpVerification = async (req, res) => {
 // SIGNUP
 exports.signup = async (req, res) => {
   try {
+    const tempToken = req.cookies.tempToken;
+    // console.trace(tempToken);
+    if (!tempToken) {
+      throw new Error("Unauthorized");
+    }
+    const decoded = jwt.verify(tempToken, process.env.JWT_SECRET);
+    const email = decoded.email;
+    console.trace(email);
     // Making sure that no one signs up as admin//
     const newUser = await User.create({
       name: req.body.name,
-      email: req.body.email,
+      email: email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
-      passwordChangedAt: req.body.passwordChangedAt,
+      // !! Just for testing purposes!!
+      // passwordChangedAt: req.body.passwordChangedAt,
     });
 
     const sessionId = uuidv4();
@@ -123,6 +156,12 @@ exports.signup = async (req, res) => {
     });
     // console.trace(newCart instanceof mongoose.Document);
     await newCart.save();
+    // !! Clearing the TEMP_JWT Token 
+    res.clearCookie("tempToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+    });
     createSendToken(newUser, sessionId, 201, res, "User created successfully");
   } catch (err) {
     res.status(400).json({
