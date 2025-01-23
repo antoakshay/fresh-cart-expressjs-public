@@ -160,7 +160,7 @@ exports.signup = async (req, res) => {
     res.clearCookie("tempToken", {
       httpOnly: true,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "none",
     });
     createSendToken(newUser, sessionId, 201, res, "User created successfully");
   } catch (err) {
@@ -505,7 +505,7 @@ exports.logout = async function (req, res, next) {
     res.clearCookie("jwt", {
       httpOnly: true,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "none",
     });
     res.status(200).json({
       status: "success",

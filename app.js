@@ -62,7 +62,7 @@ app.use(hpp());
 
 app.use((req, res, next) => {
   // console.log(req.headers);
-  console.log(req.cookies);
+  // console.trace(req.cookies);
   next();
 });
 
