@@ -85,9 +85,10 @@ exports.otpVerification = async (req, res) => {
       .update(otp.toString())
       .digest("hex");
     const newUser = await UserSignUp.findOne({ signUpOtp: hashedOtp });
-    if (!newUser) throw new Error("Invalid OTP");
+    if (!newUser) throw new Error("Invalid OTP.Please try again");
     const verifyingOtp = await newUser.compareSignUpOtpTime();
-    if (!verifyingOtp) throw new Error("OTP expired");
+    if (!verifyingOtp)
+      throw new Error("OTP expired. Please use the Sign-up again!");
 
     // !! Invalidating the signUpOtpTime after verifying the OTP
     newUser.signUpOtpExpiresAt = Date.now() - 10 * 60 * 1000;
@@ -118,8 +119,7 @@ exports.otpVerification = async (req, res) => {
   } catch (e) {
     res.status(400).json({
       status: "fail",
-
-      message: e.message || "Invalid OTP",
+      message: e.message || "Invalid OTP. Please try again",
     });
   }
 };
