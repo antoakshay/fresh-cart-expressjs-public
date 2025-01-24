@@ -89,6 +89,10 @@ exports.otpVerification = async (req, res) => {
     const verifyingOtp = await newUser.compareSignUpOtpTime();
     if (!verifyingOtp) throw new Error("OTP expired");
 
+    // !! Invalidating the signUpOtpTime after verifying the OTP
+    newUser.signUpOtpExpiresAt = Date.now() - 10 * 60 * 1000;
+    await newUser.save();
+
     // !! Creating a temp token, because in the sign-up endpoint,
     // !! WE wont know who he is, (i.e.,) no credentials access
     const tempToken = jwt.sign(
@@ -156,7 +160,7 @@ exports.signup = async (req, res) => {
     });
     // console.trace(newCart instanceof mongoose.Document);
     await newCart.save();
-    // !! Clearing the TEMP_JWT Token 
+    // !! Clearing the TEMP_JWT Token
     res.clearCookie("tempToken", {
       httpOnly: true,
       secure: true,
