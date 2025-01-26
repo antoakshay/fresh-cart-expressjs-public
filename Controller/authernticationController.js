@@ -9,7 +9,7 @@ const Cart = require("../models/cartModel");
 const Session = require("../models/sessionModel");
 const { default: mongoose } = require("mongoose");
 const UserSignUp = require("../models/userModelSignUp");
-
+const validator = require("validator");
 dotenv.config({ path: "../config.env" });
 
 // creating the json web token function
@@ -58,6 +58,9 @@ const createSendToken = (
 exports.signUpOtp = async (req, res) => {
   try {
     const email = req.body.email;
+    if (!validator.isEmail(email)) {
+      throw new Error("Invalid email");
+    }
     const exsistingUser = await User.findOne({ email: email });
     if (exsistingUser) {
       throw new Error("User Already exists");
