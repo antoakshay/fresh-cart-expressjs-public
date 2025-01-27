@@ -25,6 +25,7 @@ const createSendToken = (
   statusCode,
   res,
   userName,
+  userEmail,
   message
 ) => {
   const token = signToken(user._id, sessionId);
@@ -50,6 +51,7 @@ const createSendToken = (
     data: {
       user,
       name: userName,
+      email: userEmail,
     },
     message: message,
   });
@@ -169,7 +171,15 @@ exports.signup = async (req, res) => {
       secure: true,
       sameSite: "none",
     });
-    createSendToken(newUser, sessionId, 201, res, "User created successfully");
+    createSendToken(
+      newUser,
+      sessionId,
+      201,
+      res,
+      req.body.name,
+      email,
+      "User created successfully"
+    );
   } catch (err) {
     res.status(400).json({
       status: "fail",
@@ -209,7 +219,9 @@ exports.login = async (req, res, next) => {
     });
     await session.save();
 
-    const userName = await User.findOne({ email: email }).select("+name");
+    const userName = await User.findOne({ email: email }).select(
+      "+name +email"
+    );
 
     // 3) if everything is okay, send token to client
 
@@ -219,6 +231,7 @@ exports.login = async (req, res, next) => {
       201,
       res,
       userName.name,
+      userName.email,
       "User Logged In Successfully"
     );
   } catch (err) {
@@ -453,6 +466,12 @@ exports.updatePassword = async (req, res, next) => {
       throw new Error("The password doesn't match");
     }
 
+    // !! TO_DO Implement a instance method on the model to compare the 
+    // !! req.body.password and the exsisting password, as its in the hashed form
+    if(user.password === req.body.password) {
+      throw new Error("New password cannot be the same as the current one");
+    }
+
     // Updating the password
 
     user.password = req.body.password;
@@ -486,6 +505,8 @@ exports.updatePassword = async (req, res, next) => {
     });
   }
 };
+
+
 
 // LOGGING OUT USERS
 exports.logout = async function (req, res, next) {
