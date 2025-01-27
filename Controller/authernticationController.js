@@ -463,12 +463,11 @@ exports.updatePassword = async (req, res, next) => {
     if (
       !(await user.correctPassword(req.body.passwordCurrent, user.password))
     ) {
-      throw new Error("The password doesn't match");
+      throw new Error("The password is incorrect!");
     }
 
-    // !! TO_DO Implement a instance method on the model to compare the 
-    // !! req.body.password and the exsisting password, as its in the hashed form
-    if(user.password === req.body.password) {
+    // Returning if the user inputs the current passoword as the new password
+    if(req.body.password === req.body.passwordCurrent) {
       throw new Error("New password cannot be the same as the current one");
     }
 

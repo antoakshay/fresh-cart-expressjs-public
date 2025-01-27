@@ -84,6 +84,7 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+
 // Instance method to check if the password was modified
 // This middleware is dependent on the .protect() in authController
 userSchema.methods.changedPasswordAfter = async function (JWTTimestamp) {
