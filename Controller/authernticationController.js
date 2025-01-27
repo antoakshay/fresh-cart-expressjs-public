@@ -467,7 +467,7 @@ exports.updatePassword = async (req, res, next) => {
     }
 
     // Returning if the user inputs the current passoword as the new password
-    if(req.body.password === req.body.passwordCurrent) {
+    if (req.body.password === req.body.passwordCurrent) {
       throw new Error("New password cannot be the same as the current one");
     }
 
@@ -504,8 +504,6 @@ exports.updatePassword = async (req, res, next) => {
     });
   }
 };
-
-
 
 // LOGGING OUT USERS
 exports.logout = async function (req, res, next) {
