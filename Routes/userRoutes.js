@@ -14,8 +14,15 @@ userRouter.post(
   authenticationController.logout
 );
 userRouter.post("/forgotPassword", authenticationController.forgotPassword);
+
+// !! verifying the password reset token first!!
+userRouter.post(
+  "/resetPasswordVerification",
+  authenticationController.resetPasswordVerfiction
+);
+
 userRouter.patch(
-  "/resetPassword/:token",
+  "/resetPassword",
   authenticationController.resetPassword
 );
 userRouter.post(

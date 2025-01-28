@@ -361,7 +361,9 @@ exports.forgotPassword = async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // Creating the Reset url and message
-    const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
+    // const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
+    const REACT_URL = "https://192.168.43.117:5173";
+    const resetURL = `${REACT_URL}/resetPassword/${resetToken}`;
 
     const message = `Forgot your password? Please click this link to reset your password: ${resetURL}.
      If you didn't request this, please ignore this email.`;
@@ -394,15 +396,12 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 
-// RESET-PASSWORD
-exports.resetPassword = async function (req, res, next) {
+exports.resetPasswordVerfiction = async function (req, res) {
   try {
     // Since in the params, the unhashed reset token is sent,
     // re-hashing it to find the user belonging to that token
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(req.params.token)
-      .digest("hex");
+    const token = req.body.token;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     // Validating the token expire time as speicified in the userModel
     // methods (createResetPasswordToken).
@@ -415,14 +414,64 @@ exports.resetPassword = async function (req, res, next) {
     if (!user) {
       throw new Error("Reset Password Link Expired");
     }
+    // Deleting the resetToken and the resetTokenExpires once the token is verified
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    // Saving the document after deleting the resetToken and the resetTokenExpires
+    await user.save();
+
+    // Generating a JWT token for resetting the password , due to no access
+    // to credentials
+    const resetPassJWTToken = jwt.sign(
+      { email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "10m", // Token valid for 10 minutes
+      }
+    );
+    res.cookie("resetJWT", resetPassJWTToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+    res.status(200).json({
+      status: "success",
+      token: resetPassJWTToken,
+      message: "Reset Token verification successful",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message || "Something went wrong",
+    });
+  }
+};
+
+// RESET-PASSWORD
+exports.resetPassword = async function (req, res) {
+  try {
+    const resetJWTToken = req.cookies.resetJWT;
+    // console.trace(tempToken);
+    if (!resetJWTToken) {
+      throw new Error("Unauthorized");
+    }
+    const decoded = jwt.verify(resetJWTToken, process.env.JWT_SECRET);
+    const email = decoded.email;
+    console.trace(email);
+
+    const user = await User.findOne({ email: email });
+
+    // !! TO-DO Implement a feature to not allow the user to set the new password as same as the old one
+    
 
     // Updating the password
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
 
-    // Deleting the resetToken and the resetTokenExpires
-    user.passwordResetToken = undefined;
-    user.passwordResetExpires = undefined;
+    await user.save();
 
     // Deleting the other logged in sessions when the password is changed
     const deleteExsistingSessions = await Session.deleteMany({
@@ -442,6 +491,12 @@ exports.resetPassword = async function (req, res, next) {
       user: user._id,
     });
     await session.save();
+    // !! Clearing the TEMP_JWT Token
+    res.clearCookie("resetJWT", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     createSendToken(user._id, sessionId, 200, res, "Password reset successful");
   } catch (err) {
