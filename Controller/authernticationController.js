@@ -396,6 +396,7 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 
+// RESET-PASSWORD-TOKEN VERIFICATION
 exports.resetPasswordVerfiction = async function (req, res) {
   try {
     // Since in the params, the unhashed reset token is sent,
@@ -462,10 +463,12 @@ exports.resetPassword = async function (req, res) {
     const email = decoded.email;
     console.trace(email);
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email }).select("+password");
 
-    // !! TO-DO Implement a feature to not allow the user to set the new password as same as the old one
-    
+    // NOT allowing the user to set the new password as same as the old one
+    if (await user.correctPassword(req.body.password, user.password)) {
+      throw new Error("New password cannot be same as the old one");
+    }
 
     // Updating the password
     user.password = req.body.password;
