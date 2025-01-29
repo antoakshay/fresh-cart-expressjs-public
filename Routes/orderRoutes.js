@@ -19,4 +19,10 @@ orderRouter.get(
   orderController.trackOrder
 );
 
+orderRouter.get(
+  "/getAllUserOrders",
+  authenticationController.protect,
+  orderController.getOrdersByUserId
+);
+
 module.exports = orderRouter;

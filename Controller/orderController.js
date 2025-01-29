@@ -3,6 +3,7 @@ const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 const sendOrderEmail = require("../utils/emailOrderSummary");
 const ObjectId = require("mongodb").ObjectId;
+const jwt = require("jsonwebtoken");
 
 exports.postOrder = async function (req, res) {
   try {
@@ -133,11 +134,14 @@ exports.postOrder = async function (req, res) {
     const finalBill = order.totalPrice.toString();
     console.trace(finalBill);
 
-    await sendOrderEmail({
-      email: order.user.email,
-      subject: `Your Order Summary For the Order #${order.orderId}`,
-      message: text,
-    },finalBill);
+    await sendOrderEmail(
+      {
+        email: order.user.email,
+        subject: `Your Order Summary For the Order #${order.orderId}`,
+        message: text,
+      },
+      finalBill
+    );
 
     res.status(200).json({
       status: "OK",
@@ -208,7 +212,32 @@ exports.trackOrder = async function (req, res) {
   } catch (error) {
     res.status(500).json({
       status: "error",
-      message: error.message,
+      message: error.message || "Something went wrong",
+    });
+  }
+};
+
+exports.getOrdersByUserId = async function (req, res) {
+  try {
+    let token = req.cookies.jwt;
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    const orders = await Order.find({ user: userId })
+      .select(
+        "products.quantity products.totalPriceInd totalQuantity totalPrice orderDate orderStatus orderId"
+      )
+      .populate("products.product", "name");
+    if (!orders) {
+      throw new Error("No Order history found");
+    }
+    res.status(200).json({
+      status: "success",
+      data: orders,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: err.message,
     });
   }
 };
