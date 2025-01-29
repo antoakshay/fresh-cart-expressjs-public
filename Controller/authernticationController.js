@@ -602,3 +602,30 @@ exports.logout = async function (req, res, next) {
     });
   }
 };
+
+// !! For verifying if the user given on the jwt exsists!!
+exports.gettingUserOnJWT = async function (req, res) {
+  try {
+    let token = req.cookies.jwt;
+    if (!token) {
+      throw new Error("Unauthorized");
+    }
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.trace(decoded);
+    let userId = decoded.id;
+
+    const user = await User.findOne({ _id: userId }).select("name email");
+    if (!user) {
+      throw new Error("Account Not Found");
+    }
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message || "Something went wrong",
+    });
+  }
+};

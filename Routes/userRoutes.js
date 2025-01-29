@@ -21,10 +21,7 @@ userRouter.post(
   authenticationController.resetPasswordVerfiction
 );
 
-userRouter.patch(
-  "/resetPassword",
-  authenticationController.resetPassword
-);
+userRouter.patch("/resetPassword", authenticationController.resetPassword);
 userRouter.post(
   "/updatePassword",
   authenticationController.protect,
@@ -39,5 +36,7 @@ userRouter.delete(
   authenticationController.protect,
   userController.deleteUser
 );
+
+userRouter.get("/getUserOntoken", authenticationController.gettingUserOnJWT);
 
 module.exports = userRouter;
