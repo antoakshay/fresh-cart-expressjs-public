@@ -27,6 +27,7 @@ app.use(
   })
 );
 
+
 // GLOBAL MIDDLEWARE HELMET
 // To set security HTTP headers
 app.use(

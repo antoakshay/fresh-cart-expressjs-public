@@ -1,182 +1,272 @@
 [
   {
-    "name": "Apple Juice",
-    "description": "Freshly squeezed apple juice with no added sugar.",
-    "price": 2.99,
-    "quantity": 100,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Orange Juice",
-    "description": "100% pure orange juice, rich in Vitamin C.",
-    "price": 3.49,
-    "quantity": 120,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Grape Juice",
-    "description": "Sweet and tangy grape juice made from fresh grapes.",
-    "price": 3.99,
-    "quantity": 80,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Mango Juice",
-    "description": "Delicious mango juice with tropical flavors.",
-    "price": 4.29,
-    "quantity": 90,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Pineapple Juice",
-    "description": "Tropical pineapple juice, sweet and refreshing.",
-    "price": 3.79,
-    "quantity": 110,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Cranberry Juice",
-    "description": "Tangy cranberry juice, perfect for health-conscious consumers.",
-    "price": 3.99,
-    "quantity": 75,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Peach Juice",
-    "description": "Smooth and sweet peach juice for a delightful drink.",
-    "price": 4.19,
-    "quantity": 95,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Pomegranate Juice",
-    "description": "Rich and vibrant pomegranate juice packed with antioxidants.",
-    "price": 4.99,
-    "quantity": 60,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Watermelon Juice",
-    "description": "Light and hydrating watermelon juice with a hint of sweetness.",
-    "price": 3.59,
-    "quantity": 85,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Strawberry Juice",
-    "description": "Sweet strawberry juice made from ripe strawberries.",
-    "price": 4.39,
-    "quantity": 70,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Kiwi Juice",
-    "description": "Exotic kiwi juice with a refreshing twist.",
-    "price": 4.49,
-    "quantity": 55,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Mixed Berry Juice",
-    "description": "A blend of berries for a flavorful and antioxidant-rich juice.",
-    "price": 4.79,
-    "quantity": 65,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Lemon Juice",
-    "description": "Freshly squeezed lemon juice, perfect for drinks and recipes.",
-    "price": 2.49,
-    "quantity": 150,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Cherry Juice",
-    "description": "Sweet and tangy cherry juice from ripe cherries.",
-    "price": 4.89,
-    "quantity": 40,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Guava Juice",
-    "description": "Tropical guava juice with a smooth, sweet flavor.",
-    "price": 3.89,
-    "quantity": 72,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Lychee Juice",
-    "description": "Exquisite lychee juice with a unique, sweet taste.",
-    "price": 5.19,
-    "quantity": 38,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Blackcurrant Juice",
-    "description": "Bold and tangy blackcurrant juice, rich in Vitamin C.",
-    "price": 4.59,
+    "name": "Wireless Earbuds",
+    "description": "Noise-canceling wireless earbuds with long battery life.",
+    "price": 49.99,
     "quantity": 50,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Wireless+Earbuds",
     "soldOut": false
   },
   {
-    "name": "Papaya Juice",
-    "description": "Smooth and tropical papaya juice with a rich flavor.",
-    "price": 3.69,
+    "name": "Smartphone",
+    "description": "Latest 5G smartphone with AMOLED display and high-resolution camera.",
+    "price": 699.99,
+    "quantity": 30,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smartphone",
+    "soldOut": false
+  },
+  {
+    "name": "Gaming Laptop",
+    "description": "High-performance gaming laptop with RTX graphics card.",
+    "price": 1299.99,
+    "quantity": 20,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Gaming+Laptop",
+    "soldOut": false
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "description": "RGB mechanical keyboard with customizable keys.",
+    "price": 89.99,
+    "quantity": 40,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Mechanical+Keyboard",
+    "soldOut": false
+  },
+  {
+    "name": "Smartwatch",
+    "description": "Waterproof smartwatch with health tracking features.",
+    "price": 199.99,
+    "quantity": 35,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smartwatch",
+    "soldOut": false
+  },
+  {
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with adjustable DPI settings.",
+    "price": 29.99,
     "quantity": 60,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Wireless+Mouse",
     "soldOut": false
   },
   {
-    "name": "Cucumber Juice",
-    "description": "Refreshing cucumber juice for hydration and detox.",
-    "price": 3.29,
-    "quantity": 85,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
-    "soldOut": false
-  },
-  {
-    "name": "Coconut Juice",
-    "description": "Natural coconut juice, rich in electrolytes and hydration.",
-    "price": 5.49,
+    "name": "External Hard Drive",
+    "description": "2TB external hard drive for extra storage.",
+    "price": 79.99,
     "quantity": 25,
-    "category": "Juice",
-    "image": "https://placehold.co/400?text=A\nPlaceholder image&font=opensans",
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=External+Hard+Drive",
+    "soldOut": false
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "description": "Portable Bluetooth speaker with deep bass and long battery life.",
+    "price": 59.99,
+    "quantity": 45,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Bluetooth+Speaker",
+    "soldOut": false
+  },
+  {
+    "name": "Tablet",
+    "description": "10-inch tablet with high-resolution display and stylus support.",
+    "price": 329.99,
+    "quantity": 20,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Tablet",
+    "soldOut": false
+  },
+  {
+    "name": "VR Headset",
+    "description": "Virtual reality headset with high refresh rate and immersive experience.",
+    "price": 499.99,
+    "quantity": 15,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=VR+Headset",
+    "soldOut": false
+  },
+  {
+    "name": "Wireless Charger",
+    "description": "Fast wireless charging pad for smartphones and accessories.",
+    "price": 39.99,
+    "quantity": 70,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Wireless+Charger",
+    "soldOut": false
+  },
+  {
+    "name": "Smart TV",
+    "description": "55-inch smart TV with 4K resolution and voice assistant.",
+    "price": 799.99,
+    "quantity": 18,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smart+TV",
+    "soldOut": false
+  },
+  {
+    "name": "Electric Toothbrush",
+    "description": "Smart electric toothbrush with multiple cleaning modes.",
+    "price": 99.99,
+    "quantity": 40,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Electric+Toothbrush",
+    "soldOut": false
+  },
+  {
+    "name": "Laptop Sleeve",
+    "description": "Stylish laptop sleeve with extra padding for protection.",
+    "price": 19.99,
+    "quantity": 80,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Laptop+Sleeve",
+    "soldOut": false
+  },
+  {
+    "name": "Gaming Headset",
+    "description": "Comfortable gaming headset with noise-canceling microphone.",
+    "price": 69.99,
+    "quantity": 50,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Gaming+Headset",
+    "soldOut": false
+  },
+  {
+    "name": "Smart Thermostat",
+    "description": "Smart thermostat with app control for energy efficiency.",
+    "price": 149.99,
+    "quantity": 30,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smart+Thermostat",
+    "soldOut": false
+  },
+  {
+    "name": "Digital Camera",
+    "description": "24MP digital camera with video recording capabilities.",
+    "price": 399.99,
+    "quantity": 22,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Digital+Camera",
+    "soldOut": false
+  },
+  {
+    "name": "Smart Light Bulb",
+    "description": "Wi-Fi-enabled smart light bulb with adjustable brightness.",
+    "price": 19.99,
+    "quantity": 100,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smart+Light+Bulb",
+    "soldOut": false
+  },
+  {
+    "name": "Digital Thermometer",
+    "description": "Quick and accurate digital thermometer with LCD display.",
+    "price": 15.99,
+    "quantity": 150,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Digital+Thermometer",
+    "soldOut": false
+  },
+  {
+    "name": "Power Bank",
+    "description": "Portable power bank with 10,000mAh capacity for charging devices.",
+    "price": 29.99,
+    "quantity": 75,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Power+Bank",
+    "soldOut": false
+  },
+  {
+    "name": "Bluetooth Headphones",
+    "description": "High-quality Bluetooth headphones with 30-hour battery life.",
+    "price": 59.99,
+    "quantity": 50,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Bluetooth+Headphones",
+    "soldOut": false
+  },
+  {
+    "name": "Fitness Tracker",
+    "description": "Slim fitness tracker with heart rate monitor and sleep tracking.",
+    "price": 49.99,
+    "quantity": 100,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Fitness+Tracker",
+    "soldOut": false
+  },
+  {
+    "name": "Portable Air Conditioner",
+    "description": "Compact portable air conditioner with adjustable fan speed.",
+    "price": 199.99,
+    "quantity": 15,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Portable+Air+Conditioner",
+    "soldOut": false
+  },
+  {
+    "name": "Coffee Maker",
+    "description": "Smart coffee maker with programmable settings and app control.",
+    "price": 89.99,
+    "quantity": 25,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Coffee+Maker",
+    "soldOut": false
+  },
+  {
+    "name": "Electric Kettle",
+    "description": "Cordless electric kettle with rapid boiling and temperature control.",
+    "price": 49.99,
+    "quantity": 60,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Electric+Kettle",
+    "soldOut": false
+  },
+  {
+    "name": "Smart Lock",
+    "description": "Smart door lock with keyless entry and app control.",
+    "price": 129.99,
+    "quantity": 40,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smart+Lock",
+    "soldOut": false
+  },
+  {
+    "name": "Smart Plugs",
+    "description": "Wi-Fi-enabled smart plugs for home automation.",
+    "price": 25.99,
+    "quantity": 100,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Smart+Plugs",
+    "soldOut": false
+  },
+  {
+    "name": "Photo Printer",
+    "description": "Compact photo printer for printing photos directly from smartphones.",
+    "price": 129.99,
+    "quantity": 40,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Photo+Printer",
+    "soldOut": false
+  },
+  {
+    "name": "Digital Scale",
+    "description": "Accurate digital scale for weight measurement with LED display.",
+    "price": 19.99,
+    "quantity": 120,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Digital+Scale",
+    "soldOut": false
+  },
+  {
+    "name": "Food Processor",
+    "description": "Versatile food processor with multiple attachments and settings.",
+    "price": 179.99,
+    "quantity": 20,
+    "category": "Electronics",
+    "image": "https://placehold.co/400?text=Food+Processor",
     "soldOut": false
   }
 ]

@@ -31,7 +31,7 @@ const options = {
   cert: fs.readFileSync("./Keys/localhost+3.pem"),
 };
 
-https.createServer(options, app).listen(7000, () => {
+https.createServer(options, app).listen(7000, "0.0.0.0", () => {
   console.log("App listening on https://localhost:7000");
 });
 module.exports = app;
