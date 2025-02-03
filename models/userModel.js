@@ -85,7 +85,6 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-
 // Instance method to check if the password was modified
 // This middleware is dependent on the .protect() in authController
 userSchema.methods.changedPasswordAfter = async function (JWTTimestamp) {
@@ -99,11 +98,11 @@ userSchema.methods.changedPasswordAfter = async function (JWTTimestamp) {
     //  with iat (an integer). Using parseInt removes the fractional part,
     // ensuring the comparison is precise
     const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000);
-    console.log(
-      { changedTimestamp },
-      { JWTTimestamp },
-      changedTimestamp > JWTTimestamp
-    );
+    // console.log(
+    //   { changedTimestamp },
+    //   { JWTTimestamp },
+    //   changedTimestamp > JWTTimestamp
+    // );
 
     // jwttimestamp is iat;
     return JWTTimestamp < changedTimestamp;

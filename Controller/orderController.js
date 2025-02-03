@@ -29,7 +29,7 @@ exports.postOrder = async function (req, res) {
 
     const soldOutValidations = checkIfSoldOut.map(async (obj) => {
       const product = await Product.findOne({ _id: obj.product });
-      console.trace(product);
+      // console.trace(product);
       if (product.soldOut || obj.quantity > product.quantity) {
         throw new Error("Product is sold out");
       }
@@ -49,11 +49,56 @@ exports.postOrder = async function (req, res) {
     delete cartData._id;
     delete cartData.__v;
 
-    console.log(cartData);
+    let order;
+    // console.log(cartData);
+    try {
+      const createOrder = new Order(cartData);
+      await createOrder.generateOrderId();
+      await createOrder.save();
+      // ! AS THERE IS MANY ORDERiD ASSOCIATED WITH ONE USER ID
+      // ! FILTERING THE LATEST ORDERiD BY SORTING ASSCOCIATED WITH THE USER ID
+      order = await Order.findOne({ user: req.user._id })
+        .populate({
+          path: "products.product",
+          select: "name",
+        })
+        .populate({
+          path: "user",
+          select: "email",
+        })
+        .sort({ _id: -1 });
 
-    const createOrder = new Order(cartData);
-    await createOrder.generateOrderId();
-    await createOrder.save();
+      // console.trace(order);
+
+      const name = order.products.map((product) => {
+        return {
+          product: product.product.name,
+          quantity: product.quantity,
+          price: product.totalPriceInd,
+        };
+      });
+      // console.trace(name);
+
+      const text = name
+        .map((item) => `${item.quantity}x ${item.product} ${item.price}$`)
+        .join(",");
+
+      // console.trace(text);
+
+      const finalBill = order.totalPrice.toString();
+      // console.trace(finalBill);
+
+      await sendOrderEmail(
+        {
+          email: order.user.email,
+          subject: `Your Order Summary For the Order #${order.orderId}`,
+          message: text,
+        },
+        finalBill
+      );
+    } catch (err) {
+      throw new Error("Error creating order");
+    }
 
     // CLEARING THE CART AFTER PLACING THE ORDER
     const cart = await Cart.findOne({ user: req.user._id });
@@ -100,48 +145,6 @@ exports.postOrder = async function (req, res) {
     });
     // waiting for all the promises to resolve
     await Promise.all(soldOut);
-
-    // ! AS THERE IS MANY ORDERiD ASSOCIATED WITH ONE USER ID
-    // ! FILTERING THE LATEST ORDERiD BY SORTING ASSCOCIATED WITH THE USER ID
-    const order = await Order.findOne({ user: req.user._id })
-      .populate({
-        path: "products.product",
-        select: "name",
-      })
-      .populate({
-        path: "user",
-        select: "email",
-      })
-      .sort({ _id: -1 });
-
-    console.trace(order);
-
-    const name = order.products.map((product) => {
-      return {
-        product: product.product.name,
-        quantity: product.quantity,
-        price: product.totalPriceInd,
-      };
-    });
-    console.trace(name);
-
-    const text = name
-      .map((item) => `${item.quantity}x ${item.product} ${item.price}$`)
-      .join(",");
-
-    console.trace(text);
-
-    const finalBill = order.totalPrice.toString();
-    console.trace(finalBill);
-
-    await sendOrderEmail(
-      {
-        email: order.user.email,
-        subject: `Your Order Summary For the Order #${order.orderId}`,
-        message: text,
-      },
-      finalBill
-    );
 
     res.status(200).json({
       status: "OK",
