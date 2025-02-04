@@ -3,7 +3,6 @@ const dotenv = require("dotenv");
 const path = require("path");
 const PDFDocument = require("pdfkit");
 const { PassThrough } = require("stream");
-const { buffer } = require("stream/consumers");
 const result = dotenv.config({ path: path.join(__dirname, "../config.env") });
 
 if (result.error) {

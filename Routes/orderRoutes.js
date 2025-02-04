@@ -19,8 +19,8 @@ orderRouter.get(
   orderController.trackOrder
 );
 
-orderRouter.get(
-  "/getAllUserOrders",
+orderRouter.post(
+  "/getAllOrderHistory", 
   authenticationController.protect,
   orderController.getOrdersByUserId
 );

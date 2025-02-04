@@ -225,11 +225,18 @@ exports.getOrdersByUserId = async function (req, res) {
     let token = req.cookies.jwt;
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
+
+    // Making the sortId param to have a default value to display recent orders.
+    // value 1 for most recent orders,
+    // value -1 for least recent orders.
+    let sortId = req.body.sortId;
+
     const orders = await Order.find({ user: userId })
       .select(
         "products.quantity products.totalPriceInd totalQuantity totalPrice orderDate orderStatus orderId"
       )
-      .populate("products.product", "name");
+      .populate("products.product", "name")
+      .sort({ _id: sortId });
     if (!orders) {
       throw new Error("No Order history found");
     }

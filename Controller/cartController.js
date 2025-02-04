@@ -118,7 +118,7 @@ exports.getCart = async function (req, res, next) {
     const cart = await Cart.find()
       .populate({ path: "user", select: "name email" })
       .populate({ path: "products.product", select: "name price category" });
-    console.log(cart.products);
+    // console.trace(cart.products);
     res.status(200).json({
       status: "success",
       data: cart,
@@ -173,7 +173,10 @@ exports.deleteIndividualProd = async function (req, res) {
     await cart.finalCartPrice();
     await cart.save();
 
-    const updatedCart = await Cart.findOne({ user: req.user._id });
+    const updatedCart = await Cart.findOne({ user: req.user._id }).populate({
+      path: "products.product",
+      select: "name soldOut",
+    });
 
     res.status(200).json({
       status: "success",
@@ -195,8 +198,9 @@ exports.getCartById = async function (req, res) {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate({
       path: "products.product",
-      select: "name",
+      select: "name soldOut",
     });
+    console.trace(cart);
     res.status(200).json({
       status: "success",
       data: cart,
