@@ -43,7 +43,11 @@ const orderSchema = new mongoose.Schema({
   orderStatus: {
     type: String,
     enum: ["pending", "delivered"],
-    default: "pending",
+    default: function () {
+      return this.orderDate > Date.now() + 30 * 60 * 1000
+        ? "delivered"
+        : "pending";
+    },
   },
 });
 

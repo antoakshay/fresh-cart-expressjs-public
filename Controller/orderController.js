@@ -190,7 +190,7 @@ exports.trackOrder = async function (req, res) {
   try {
     const order = await Order.findOne({ orderId: orderId })
       .select("-user")
-      .select("-orderId")
+      .select("orderId")
       .select("-address")
       .select("-__v")
       // .select("-_id")
@@ -227,8 +227,8 @@ exports.getOrdersByUserId = async function (req, res) {
     const userId = decoded.id;
 
     // Making the sortId param to have a default value to display recent orders.
-    // value 1 for most recent orders,
-    // value -1 for least recent orders.
+    // value -1 for most recent orders,
+    // value 1 for least recent orders.
     let sortId = req.body.sortId;
 
     const orders = await Order.find({ user: userId })

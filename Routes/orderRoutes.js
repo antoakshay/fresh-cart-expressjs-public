@@ -13,7 +13,7 @@ orderRouter.get(
   orderController.getLatestOrder
 );
 
-orderRouter.get(
+orderRouter.post(
   "/trackOrder",
   authenticationController.protect,
   orderController.trackOrder
