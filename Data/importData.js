@@ -7,7 +7,7 @@ const Cart = require("../models/cartModel");
 
 const DB =
   process.env.DATABASE ||
-  "mongodb+srv://antolazarus7:fhgymAVkW9gbansk@cluster0.gcv1w.mongodb.net/fresh-cart?retryWrites=true&w=majority&appName=Cluster0";
+  "YOUR CLUSTER ID HERE";
 
 mongoose
   .connect(DB, {
