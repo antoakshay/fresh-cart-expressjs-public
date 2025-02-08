@@ -27,8 +27,11 @@ mongoose
 // });
 
 const options = {
-  key: fs.readFileSync("./Keys/omac5g-key.pem"),
-  cert: fs.readFileSync("./Keys/omac 5g.pem"),
+  key:"Your KEY goes here",
+  cert: "Your cert goes here",
+  
+  // key: fs.readFileSync("./Keys/omac5g-key.pem"),
+  // cert: fs.readFileSync("./Keys/omac 5g.pem"),
 };
 
 https.createServer(options, app).listen(7000, "0.0.0.0", () => {
