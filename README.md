@@ -67,3 +67,7 @@ npm install -g nodemon
 ## Then run the server:
 
 nodemon server.js
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## For the password reset E-mail functionalities to work, update the REACT_URL inside the authenticationController.js to your fronted IP Address.
+
