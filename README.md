@@ -71,3 +71,6 @@ nodemon server.js
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## For the password reset E-mail functionalities to work, update the REACT_URL inside the authenticationController.js to your fronted IP Address.
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## In app.js, add the frontend's port address (where your web app is hosted) to the CORS middleware to allow access.
+
